@@ -8,7 +8,7 @@ namespace LoggingKata.Test
         [Fact]
         public void ShouldDoSomething()
         {
-            // TODO: Complete Something, if anything
+            // Complete Something, if anything
 
             //Arrange
             var tacoParser = new TacoParser();
@@ -25,19 +25,59 @@ namespace LoggingKata.Test
         [InlineData("34.073638, -84.677017, Taco Bell Acwort...", -84.677017)]
         public void ShouldParseLongitude(string line, double expected)
         {
-            // TODO: Complete - "line" represents input data we will Parse to
+            // Complete - "line" represents input data we will Parse to
             //       extract the Longitude.  Your .csv file will have many of these lines,
             //       each representing a TacoBell location
 
             //Arrange
+            var utility = new TacoParser();
 
             //Act
+            var actual = utility.Parse(line);
 
             //Assert
+            Assert.Equal(expected, actual.Location.Longitude);
+
         }
 
 
-        //TODO: Create a test ShouldParseLatitude
+        // Create a test ShouldParseLatitude
+        [Theory]
+        [InlineData("34.073638, -84.677017, Taco Bell Acwort...", -84.677017)]
+        public void ShouldParseLatitude(string line, double expected)
+        {
+            // Complete - "line" represents input data we will Parse to
+            //       extract the Longitude.  Your .csv file will have many of these lines,
+            //       each representing a TacoBell location
+
+            //Arrange
+            var utility = new TacoParser();
+
+            //Act
+            var actual = utility.Parse(line);
+
+            //Assert
+            Assert.Equal(expected, actual.Location.Longitude);
+
+        }
+
+        // Should parse name
+        [Theory]
+        [InlineData("34.073638, -84.677017, Taco Bell Acwort...", "Taco Bell Acwort...")]
+        public void ShouldParseName(string line, string expected)
+        {
+
+            //Arrange
+            var utility = new TacoParser();
+
+            //Act
+            var actual = utility.Parse(line);
+            actual.Name = actual.Name.ToString().Trim(' ');
+
+            //Assert
+            Assert.Equal(expected, actual.Name);
+
+        }
 
     }
 }
